@@ -24,8 +24,10 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+Route::middleware("auth")->prefix("/admin")->name("admin.")->group(function () {
 
-Route::get('/pojects', [AdminProjectController::class, "index"])->name('admin.projects.index');
-Route::get('/pojects/{id}', [AdminProjectController::class, "create"])->name('admin.projects.create');
-Route::get('/pojects/create', [AdminProjectController::class, "show"])->name('admin.projects.show');
-Route::post('/pojects', [AdminProjectController::class, "store"])->name('admin.projects.store');
+    Route::get('/projects', [AdminProjectController::class, "index"])->name('projects.index');
+    Route::get('/projects/{id}', [AdminProjectController::class, "create"])->name('projects.create');
+    Route::get('/projects/create', [AdminProjectController::class, "show"])->name('projects.show');
+    Route::post('/projects', [AdminProjectController::class, "store"])->name('projects.store');
+});
