@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Http\Request;
+use SebastianBergmann\CodeCoverage\Report\Xml\Project as XmlProject;
 
 class ProjectController extends Controller
 {
@@ -12,7 +14,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = [];
+        $projects = Project::all();
         return view("admin.projects.index", compact("projects"));
     }
 
@@ -21,7 +23,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.projects.create");
     }
 
     /**
@@ -29,7 +31,10 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate();
+
+        $project = Project::create();
+        return redirect()->route("admin.projects.index");
     }
 
     /**
@@ -37,7 +42,8 @@ class ProjectController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $project = Project::findOrFail($id);
+        return view("admin.projects.show", compact("project"));
     }
 
     /**
