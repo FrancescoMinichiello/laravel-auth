@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->string("title", 255);
+            $table->string("author", 255);
+            $table->text("content");
             $table->timestamps();
         });
     }
